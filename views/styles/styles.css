@@ -41,7 +41,6 @@
 }
 .animate-fade-in { animation: fadeIn 0.3s ease-out; }
 
-
 .step-card { transition: all 0.2s ease-in-out; }
 .step-card:hover { transform: translateY(-2px); }
 ::-webkit-scrollbar { width: 8px; }
