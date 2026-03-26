@@ -10,7 +10,6 @@ $tab = $tab ?? ($_GET['tab'] ?? 'login');
 
 <body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark font-sans antialiased transition-colors duration-300 min-h-screen flex items-center justify-center p-4">
 
-<!-- Toggle Dark Mode -->
 <button class="fixed top-4 right-4 z-50 p-2 rounded-full bg-surface-light dark:bg-surface-dark shadow-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors border border-gray-200 dark:border-slate-700"
         onclick="document.documentElement.classList.toggle('dark')">
     <i class="fas fa-moon text-indigo-600 dark:hidden"></i>
@@ -18,10 +17,6 @@ $tab = $tab ?? ($_GET['tab'] ?? 'login');
 </button>
 
 <main class="w-full max-w-[1200px] h-full md:min-h-[750px] bg-surface-light dark:bg-surface-dark rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row border border-gray-200 dark:border-slate-700">
-    
-    <!-- ============================== -->
-    <!-- Panel Izquierdo - Decorativo   -->
-    <!-- ============================== -->
     <div class="hidden md:flex w-full md:w-1/2 bg-indigo-50 dark:bg-slate-900 relative items-center justify-center overflow-hidden">
         <img alt="Espacio de trabajo saludable" 
              class="absolute inset-0 w-full h-full object-cover opacity-80 dark:opacity-40"
@@ -60,9 +55,6 @@ $tab = $tab ?? ($_GET['tab'] ?? 'login');
         </div>
     </div>
 
-    <!-- ============================== -->
-    <!-- Panel Derecho - Formularios    -->
-    <!-- ============================== -->
     <div class="w-full md:w-1/2 p-8 md:p-12 lg:p-16 flex flex-col justify-center relative bg-surface-light dark:bg-surface-dark">
         
         <!-- Logo móvil -->

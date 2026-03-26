@@ -66,7 +66,7 @@ require_once __DIR__ . '/../../config/app.php';
                 </div>
                 <div class="flex items-center space-x-4">
                     <button onclick="document.documentElement.classList.toggle('dark')" class="p-2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors">
-                        <span class="material-icons-round">dark_mode</span>
+                        <span class="material-icons-outlined">dark_mode</span>
                     </button>
                     <a href="<?= url('/auth/login') ?>" class="text-gray-500 dark:text-gray-300 hover:text-primary px-3 py-2 rounded-md text-sm font-medium hidden sm:block">Login</a>
                     <a href="<?= url('/auth/login?tab=register') ?>" class="bg-primary hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-md transition-all">

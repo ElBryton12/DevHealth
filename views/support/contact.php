@@ -4,19 +4,15 @@
  * Ubicación: views/support/contact.php
  */
 
-// 1. Cargar lógica inicial (Ajusta las rutas según tu Front Controller si es necesario)
 require_once __DIR__ . '/../../config/helpers.php';
 require_once __DIR__ . '/../../models/User.php';
 
-// Iniciamos sesión para que currentUser() funcione
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Obtenemos el usuario actual a través del helper que me pasaste
 $user = currentUser();
 
-// 2. Incluir el Head global
 include_once __DIR__ . '/../layouts/head.php';
 ?>
 

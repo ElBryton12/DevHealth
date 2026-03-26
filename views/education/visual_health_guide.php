@@ -13,7 +13,6 @@ if (session_status() === PHP_SESSION_NONE) {
 
 $user = currentUser();
 
-// Incluimos el <head> global
 include_once __DIR__ . '/../layouts/head.php';
 ?>
 
@@ -22,7 +21,7 @@ include_once __DIR__ . '/../layouts/head.php';
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
     }
-    /* Estilo para el subrayado animado del título */
+
     .underline-svg {
         filter: drop-shadow(0px 2px 2px rgba(99, 102, 241, 0.4));
     }

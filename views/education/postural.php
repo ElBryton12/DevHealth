@@ -13,12 +13,10 @@ if (session_status() === PHP_SESSION_NONE) {
 
 $user = currentUser();
 
-// Incluimos el <head> global que ya tiene Tailwind e Inter
 include_once __DIR__ . '/../layouts/head.php';
 ?>
 
 <style>
-    /* ── Utilidades existentes ──────────────────────────────── */
     .gradient-text {
         background-clip: text;
         -webkit-background-clip: text;
@@ -29,16 +27,10 @@ include_once __DIR__ . '/../layouts/head.php';
         animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     }
 
-    /* ── Dark mode: badge "Módulo Educativo" ────────────────── */
-    /*   bg-primary/10 es demasiado tenue en fondos oscuros      */
     .dark .bg-primary\/10 {
         background-color: rgba(99, 102, 241, 0.20);
     }
 
-    /* ── Dark mode: sección "Correcto vs Incorrecto" ────────── */
-    /*   Los bg-red-50 / bg-green-50 de Tailwind quedan sin      */
-    /*   contraste sobre fondos oscuros; se reemplazan con       */
-    /*   versiones muy oscuras y semitransparentes.              */
     .dark .bg-red-50 {
         background-color: rgba(127, 29, 29, 0.15);
     }
