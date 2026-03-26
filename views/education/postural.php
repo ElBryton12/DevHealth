@@ -16,35 +16,6 @@ $user = currentUser();
 include_once __DIR__ . '/../layouts/head.php';
 ?>
 
-<style>
-    .gradient-text {
-        background-clip: text;
-        -webkit-background-clip: text;
-        color: transparent;
-        background-image: linear-gradient(to right, #6366f1, #8b5cf6);
-    }
-    .animate-pulse-slow {
-        animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    }
-
-    .dark .bg-primary\/10 {
-        background-color: rgba(99, 102, 241, 0.20);
-    }
-
-    .dark .bg-red-50 {
-        background-color: rgba(127, 29, 29, 0.15);
-    }
-    .dark .border-red-200 {
-        border-color: rgba(185, 28, 28, 0.35);
-    }
-    .dark .bg-green-50 {
-        background-color: rgba(20, 83, 45, 0.15);
-    }
-    .dark .border-green-200 {
-        border-color: rgba(22, 101, 52, 0.35);
-    }
-</style>
-
 <body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark font-sans antialiased transition-colors duration-300">
 
     <?php include_once __DIR__ . '/../layouts/navbar.php'; ?>

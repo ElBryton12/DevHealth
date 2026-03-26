@@ -23,14 +23,6 @@ $flashSuccess = getFlash('success');
 </div>
 <?php endif; ?>
 
-<style>
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-.animate-fade-in { animation: fadeIn 0.3s ease-out; }
-</style>
-
 <script>
 // Auto-dismiss flash messages after 5 seconds
 setTimeout(() => {

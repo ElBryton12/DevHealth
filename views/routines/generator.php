@@ -7,14 +7,6 @@ $pageTitle = 'Generador de Rutinas';
 require __DIR__ . '/../layouts/head.php';
 ?>
 
-<style>
-    .step-card { transition: all 0.2s ease-in-out; }
-    .step-card:hover { transform: translateY(-2px); }
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-    .dark ::-webkit-scrollbar-thumb { background: #475569; }
-</style>
 
 <body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark font-sans min-h-screen flex flex-col antialiased">
 

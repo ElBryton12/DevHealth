@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= e($pageTitle ?? 'DevHealth') ?> - <?= APP_NAME ?></title>
-    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../styles/styles.css">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
     
@@ -45,13 +46,6 @@
             },
         };
     </script>
-    
-    <style>
-        html { scroll-behavior: smooth; }
-        .tab-content { transition: opacity 0.3s ease-in-out; }
-        .hidden-tab { display: none; opacity: 0; }
-        .visible-tab { display: block; opacity: 1; }
-    </style>
     
     <?php if (!empty($extraHead)): ?>
         <?= $extraHead ?>

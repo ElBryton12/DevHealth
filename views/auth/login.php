@@ -8,6 +8,19 @@ $tab = $tab ?? ($_GET['tab'] ?? 'login');
 ?>
 <?php require __DIR__ . '/../layouts/head.php'; ?>
 
+<style>
+    .tab-content {
+        transition: opacity 0.3s ease-in-out;
+    }
+    .hidden-tab {
+        display: none;
+        opacity: 0;
+    }
+    .visible-tab {
+        display: block;
+        opacity: 1;
+    }
+</style>
 <body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark font-sans antialiased transition-colors duration-300 min-h-screen flex items-center justify-center p-4">
 
 <button class="fixed top-4 right-4 z-50 p-2 rounded-full bg-surface-light dark:bg-surface-dark shadow-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors border border-gray-200 dark:border-slate-700"
