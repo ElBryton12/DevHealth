@@ -359,4 +359,47 @@ class Routine {
             default   => 'Moderado',
         };
     }
+
+    /**
+     * Obtener el historial de rutinas de un usuario
+     */
+    public function getHistoryByUserId(int $userId): array {
+        try {
+            // Seleccionamos las rutinas del usuario ordenadas por las más recientes
+            $stmt = $this->db->prepare("
+                SELECT * FROM routines 
+                WHERE user_id = :uid 
+                ORDER BY created_at DESC
+            ");
+            $stmt->execute([':uid' => $userId]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Error al obtener historial: " . $e->getMessage());
+            return [];
+        }
+    }
+
+    /**
+     * Obtener estadísticas rápidas para los cuadros superiores
+     */
+    public function getStats(int $userId): array {
+        try {
+            $stmt = $this->db->prepare("
+                SELECT 
+                    COUNT(*) as total,
+                    SUM(CASE WHEN focus_area = 'visual' AND status = 'completed' THEN 1 ELSE 0 END) as visual_completed
+                FROM routines 
+                WHERE user_id = :uid
+            ");
+            $stmt->execute([':uid' => $userId]);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            return [
+                'total' => $result['total'] ?? 0,
+                'visual_completed' => $result['visual_completed'] ?? 0
+            ];
+        } catch (PDOException $e) {
+            return ['total' => 0, 'visual_completed' => 0];
+        }
+    }
 }

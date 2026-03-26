@@ -70,6 +70,30 @@ if (preg_match('#^/routines/complete/(\d+)$#', $route, $matches)) {
     exit;
 }
 
+// --- Soporte ---
+if ($route === '/support/contact') {
+    require_once __DIR__ . '/../controllers/AuthController.php';
+    require __DIR__ . '/../views/support/contact.php';
+    exit;
+}
+
+// --- Educación ---
+if ($route === '/education/postural') {
+    require_once __DIR__ . '/../views/education/postural.php';
+    exit;
+}
+
+if ($route === '/education/visual') {
+    require_once __DIR__ . '/../views/education/visual_health_guide.php';
+    exit;
+}
+
+// --- Historial ---
+if ($route === '/routines/history') {
+    require_once __DIR__ . '/../views/history/history_log.php';
+    exit;
+}
+
 // --- 404 ---
 http_response_code(404);
 require __DIR__ . '/../views/layouts/404.php';
