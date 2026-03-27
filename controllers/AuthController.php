@@ -19,8 +19,6 @@ class AuthController {
         redirectIfAuthenticated();
         
         $tab = $_GET['tab'] ?? 'login';
-        $error = getFlash('error');
-        $success = getFlash('success');
         
         require __DIR__ . '/../views/auth/login.php';
     }
@@ -40,10 +38,9 @@ class AuthController {
             return;
         }
 
-        $email = $_POST['email'] ?? '';
+        $email    = trim($_POST['email'] ?? '');
         $password = $_POST['password'] ?? '';
 
-        // Validaciones básicas
         if (empty($email) || empty($password)) {
             setFlash('error', 'Todos los campos son obligatorios.');
             redirect('/auth/login');
@@ -53,16 +50,10 @@ class AuthController {
         $result = $this->userModel->login($email, $password);
 
         if ($result['success']) {
-            // Establecer sesión
             $_SESSION['user_id'] = $result['user']['id'];
-            $_SESSION['user'] = $result['user'];
-            
-            // Regenerar ID de sesión por seguridad
+            $_SESSION['user']    = $result['user'];
             session_regenerate_id(true);
-
-            // Registrar actividad
             $this->logActivity($result['user']['id'], 'login');
-
             redirect('/dashboard');
         } else {
             setFlash('error', $result['error']);

@@ -10,22 +10,15 @@ $tab = $tab ?? ($_GET['tab'] ?? 'login');
 
 <style>
     .tab-content {
-        transition: opacity 0.2s ease-in-out;
-        width: 100%;
-        max-width: 28rem; /* max-w-md */
+        transition: opacity 0.3s ease-in-out;
     }
     .hidden-tab {
-        position: absolute;
-        top: 0; left: 0;
-        visibility: hidden;
+        display: none;
         opacity: 0;
-        pointer-events: none;
     }
     .visible-tab {
-        position: relative;
-        visibility: visible;
+        display: block;
         opacity: 1;
-        pointer-events: auto;
     }
 </style>
 <body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark font-sans antialiased transition-colors duration-300 min-h-screen flex items-center justify-center p-4">
@@ -75,15 +68,8 @@ $tab = $tab ?? ($_GET['tab'] ?? 'login');
         </div>
     </div>
 
-    <div class="w-full md:w-1/2 p-8 md:p-12 lg:p-16 pt-14 flex flex-col justify-center relative bg-surface-light dark:bg-surface-dark md:h-[750px]">
+    <div class="w-full md:w-1/2 p-8 md:p-12 lg:p-16 flex flex-col justify-center relative bg-surface-light dark:bg-surface-dark">
         
-        <!-- Botón volver al inicio — esquina superior izquierda -->
-        <a href="<?= url('/') ?>"
-           class="absolute top-4 left-6 flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors group">
-            <span class="material-icons-round text-base group-hover:-translate-x-0.5 transition-transform">arrow_back</span>
-            <span>Volver al inicio</span>
-        </a>
-
         <!-- Logo móvil -->
         <div class="md:hidden flex items-center justify-center gap-2 mb-8 text-primary">
             <i class="fas fa-heart-pulse text-2xl"></i>
@@ -99,7 +85,6 @@ $tab = $tab ?? ($_GET['tab'] ?? 'login');
         </div>
 
         <!-- ===== LOGIN ===== -->
-        <div class="relative w-full" style="min-height: 440px;">
         <div class="<?= $tab === 'login' ? 'visible-tab' : 'hidden-tab' ?> tab-content max-w-md w-full mx-auto md:mx-0" id="login-form">
             <div class="mb-8">
                 <h2 class="text-3xl font-bold mb-2">Bienvenido de vuelta</h2>
@@ -130,12 +115,29 @@ $tab = $tab ?? ($_GET['tab'] ?? 'login');
                             <i class="fas fa-eye"></i>
                         </button>
                     </div>
+                    <div class="flex justify-end mt-1">
+                        <a class="text-xs font-medium text-primary hover:text-primary-hover" href="#">¿Olvidaste tu contraseña?</a>
+                    </div>
                 </div>
 
                 <button type="submit" class="w-full py-3 px-4 bg-primary hover:bg-primary-hover text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5">
                     Iniciar Sesión
                 </button>
             </form>
+
+            <div class="relative my-8">
+                <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-gray-200 dark:border-slate-700"></div></div>
+                <div class="relative flex justify-center text-sm"><span class="px-2 bg-surface-light dark:bg-surface-dark text-muted-light dark:text-muted-dark">O continúa con</span></div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <button type="button" disabled class="flex items-center justify-center gap-2 py-2.5 px-4 border border-gray-200 dark:border-slate-600 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors opacity-60 cursor-not-allowed">
+                    <i class="fab fa-google text-red-500"></i><span class="text-sm font-medium">Google</span>
+                </button>
+                <button type="button" disabled class="flex items-center justify-center gap-2 py-2.5 px-4 border border-gray-200 dark:border-slate-600 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors opacity-60 cursor-not-allowed">
+                    <i class="fab fa-github text-xl"></i><span class="text-sm font-medium">GitHub</span>
+                </button>
+            </div>
         </div>
 
         <!-- ===== REGISTRO ===== -->
@@ -200,9 +202,21 @@ $tab = $tab ?? ($_GET['tab'] ?? 'login');
                     Crear Cuenta
                 </button>
             </form>
-        </div>
 
-        </div><!-- /tabs-wrapper -->
+            <div class="relative my-6">
+                <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-gray-200 dark:border-slate-700"></div></div>
+                <div class="relative flex justify-center text-sm"><span class="px-2 bg-surface-light dark:bg-surface-dark text-muted-light dark:text-muted-dark">O regístrate con</span></div>
+            </div>
+
+            <div class="flex justify-center gap-4">
+                <button type="button" disabled class="p-2 rounded-full border border-gray-200 dark:border-slate-600 hover:bg-gray-50 dark:hover:bg-slate-700 bg-white dark:bg-slate-800 opacity-60 cursor-not-allowed">
+                    <i class="fab fa-google text-red-500 text-xl"></i>
+                </button>
+                <button type="button" disabled class="p-2 rounded-full border border-gray-200 dark:border-slate-600 hover:bg-gray-50 dark:hover:bg-slate-700 bg-white dark:bg-slate-800 opacity-60 cursor-not-allowed">
+                    <i class="fab fa-github text-xl"></i>
+                </button>
+            </div>
+        </div>
 
         <div class="mt-8 text-center md:text-left">
             <p class="text-xs text-muted-light dark:text-muted-dark">
@@ -222,17 +236,13 @@ function switchTab(tab) {
     const inactiveClasses = ['text-muted-light', 'dark:text-muted-dark'];
 
     if (tab === 'login') {
-        loginForm.classList.remove('hidden-tab');
-        loginForm.classList.add('visible-tab');
-        registerForm.classList.remove('visible-tab');
-        registerForm.classList.add('hidden-tab');
+        loginForm.classList.replace('hidden-tab', 'visible-tab');
+        registerForm.classList.replace('visible-tab', 'hidden-tab');
         activeClasses.forEach(c => { loginBtn.classList.add(c); registerBtn.classList.remove(c); });
         inactiveClasses.forEach(c => { loginBtn.classList.remove(c); registerBtn.classList.add(c); });
     } else {
-        registerForm.classList.remove('hidden-tab');
-        registerForm.classList.add('visible-tab');
-        loginForm.classList.remove('visible-tab');
-        loginForm.classList.add('hidden-tab');
+        registerForm.classList.replace('hidden-tab', 'visible-tab');
+        loginForm.classList.replace('visible-tab', 'hidden-tab');
         activeClasses.forEach(c => { registerBtn.classList.add(c); loginBtn.classList.remove(c); });
         inactiveClasses.forEach(c => { registerBtn.classList.remove(c); loginBtn.classList.add(c); });
     }
@@ -271,6 +281,9 @@ document.getElementById('reg-password')?.addEventListener('input', function(e) {
     document.getElementById('str-text').textContent = s > 0 ? 'Fortaleza: ' + labels[s - 1] : 'Mínimo 8 caracteres.';
 });
 
+if (window.matchMedia?.('(prefers-color-scheme: dark)').matches) {
+    document.documentElement.classList.add('dark');
+}
 </script>
 </body>
 </html>
