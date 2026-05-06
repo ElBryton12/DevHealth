@@ -270,12 +270,8 @@ http://localhost
 
 ## 👥 Autores
 
-**Brayan De Jesús Castillo** — Matrícula 202121297  
+**Brayan De Jesús Castillo**
 **Eduardo García Mendoza**
-
-Materia: Aplicaciones Web · NRC 47364  
-Profesor: María del Carmen Santiago Díaz  
-Facultad de Ciencias de la Computación, BUAP · Primavera 2026
 
 ---
 
