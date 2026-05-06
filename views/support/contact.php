@@ -155,11 +155,5 @@ include_once __DIR__ . '/../layouts/head.php';
 
     <?php include_once __DIR__ . '/../layouts/footer.php'; ?>
 
-    <script>
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-             document.documentElement.classList.add('dark');
-        }
-    </script>
-
 </body>
 </html>

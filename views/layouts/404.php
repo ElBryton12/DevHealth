@@ -8,8 +8,5 @@
             <span class="material-icons-round">home</span> Volver al inicio
         </a>
     </div>
-    <script>
-        if (window.matchMedia?.('(prefers-color-scheme: dark)').matches) document.documentElement.classList.add('dark');
-    </script>
 </body>
 </html>

@@ -14,24 +14,17 @@
                 <a class="text-base text-gray-500 hover:text-gray-900 dark:hover:text-white" href="<?= url('/support/contact') ?>">Soporte</a>
             </div>
         </nav>
-        
+
         <div class="mt-8 flex justify-center space-x-6">
-            <a class="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300" href="#" aria-label="GitHub">
+            <a class="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300" href="https://github.com/ElBryton12/DevHealth"target="_blank" rel="noopener" aria-label="GitHub">
                 <i class="fab fa-github text-xl"></i>
             </a>
         </div>
-        
+
         <p class="mt-8 text-center text-base text-gray-400">
             &copy; <?= date('Y') ?> <?= APP_NAME ?> Platform. Todos los derechos reservados.
         </p>
     </div>
 </footer>
-
-<!-- Dark mode: detectar preferencia del sistema -->
-<script>
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.documentElement.classList.add('dark');
-    }
-</script>
 </body>
 </html>

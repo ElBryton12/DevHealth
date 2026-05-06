@@ -282,5 +282,28 @@ require_once __DIR__ . '/../../config/app.php';
         </div>
     </footer>
 
+<!-- Botón Scroll To Top -->
+<button id="scroll-top"
+        onclick="window.scrollTo({top:0, behavior:'smooth'})"
+        title="Volver arriba"
+        class="fixed bottom-6 right-6 z-50 p-3 bg-primary hover:bg-primary-hover text-white rounded-full shadow-lg shadow-primary/30 opacity-0 pointer-events-none transition-all duration-300 hover:scale-110 active:scale-95">
+    <span class="material-icons-outlined">arrow_upward</span>
+</button>
+
+<script>
+(function() {
+    var btn = document.getElementById('scroll-top');
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 300) {
+            btn.classList.remove('opacity-0', 'pointer-events-none');
+            btn.classList.add('opacity-100');
+        } else {
+            btn.classList.add('opacity-0', 'pointer-events-none');
+            btn.classList.remove('opacity-100');
+        }
+    }, { passive: true });
+})();
+</script>
+
 </body>
 </html>

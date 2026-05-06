@@ -255,9 +255,9 @@ include_once __DIR__ . '/../layouts/head.php';
                     </p>
                     </div>
                     <div>
-                        <button class="bg-white text-primary font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-gray-50 transition-colors transform hover:scale-105">
+                        <a href="<?= url('/routines/generator') ?>" class="bg-white text-primary font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-gray-50 transition-colors transform hover:scale-105 inline-block">
                             Crear mi Rutina
-                        </button>
+                        </a>
                 </div>
             </div>
         </section>

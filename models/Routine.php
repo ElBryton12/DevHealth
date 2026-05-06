@@ -331,13 +331,16 @@ class Routine {
     }
 
     /**
-     * Marcar rutina como completada
+     * Marcar rutina como completada usando el procedimiento almacenado.
+     * El trigger trg_after_routine_completed registra en activity_log
+     * automáticamente dentro de MySQL — PHP no necesita hacerlo.
      */
     public function markCompleted(int $id, int $userId): bool {
-        $stmt = $this->db->prepare(
-            "UPDATE routines SET status = 'completed', completed_at = NOW() WHERE id = :id AND user_id = :uid"
-        );
-        return $stmt->execute([':id' => $id, ':uid' => $userId]);
+        $stmt = $this->db->prepare("CALL CompleteRoutine(:id, :uid, @result)");
+        $stmt->execute([':id' => $id, ':uid' => $userId]);
+
+        $row = $this->db->query("SELECT @result AS result")->fetch();
+        return (bool) ($row['result'] ?? 0);
     }
 
     private function getFocusLabel(array $painAreas): string {
@@ -382,56 +385,19 @@ class Routine {
     }
 
     /**
-     * Obtener estadísticas globales del historial de un usuario.
-     * 
-     * Usado por: views/history/history_log.php
-     * 
-     * Retorna:
-     *   - total            : total de rutinas (cualquier estado)
-     *   - completed        : rutinas completadas
-     *   - visual_completed : rutinas de tipo 'visual' completadas
-     *   - total_minutes    : suma de minutos de rutinas completadas
-     * 
-     * @param  int   $userId
-     * @return array
+     * Obtener estadísticas del usuario usando el procedimiento almacenado.
+     * MySQL calcula todo en una sola consulta eficiente.
      */
     public function getStats(int $userId): array {
-        // Total de rutinas generadas
-        $stmt = $this->db->prepare(
-            "SELECT COUNT(*) FROM routines WHERE user_id = :uid"
-        );
+        $stmt = $this->db->prepare("CALL GetUserStats(:uid)");
         $stmt->execute([':uid' => $userId]);
-        $total = (int) $stmt->fetchColumn();
-
-        // Rutinas completadas
-        $stmt = $this->db->prepare(
-            "SELECT COUNT(*) FROM routines
-             WHERE user_id = :uid AND status = 'completed'"
-        );
-        $stmt->execute([':uid' => $userId]);
-        $completed = (int) $stmt->fetchColumn();
-
-        // Descansos visuales completados
-        $stmt = $this->db->prepare(
-            "SELECT COUNT(*) FROM routines
-             WHERE user_id = :uid AND status = 'completed' AND focus_area = 'visual'"
-        );
-        $stmt->execute([':uid' => $userId]);
-        $visualCompleted = (int) $stmt->fetchColumn();
-
-        // Minutos activos totales
-        $stmt = $this->db->prepare(
-            "SELECT COALESCE(SUM(duration_min), 0) FROM routines
-             WHERE user_id = :uid AND status = 'completed'"
-        );
-        $stmt->execute([':uid' => $userId]);
-        $totalMinutes = (int) $stmt->fetchColumn();
+        $row = $stmt->fetch();
 
         return [
-            'total'            => $total,
-            'completed'        => $completed,
-            'visual_completed' => $visualCompleted,
-            'total_minutes'    => $totalMinutes,
+            'total'            => (int) ($row['total_generated']   ?? 0),
+            'completed'        => (int) ($row['total_completed']    ?? 0),
+            'visual_completed' => (int) ($row['visual_breaks']      ?? 0),
+            'total_minutes'    => (int) ($row['active_minutes']     ?? 0),
         ];
     }
 }

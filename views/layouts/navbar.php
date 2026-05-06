@@ -10,44 +10,39 @@
                     </span>
                     <span class="font-bold text-xl tracking-tight text-gray-900 dark:text-white"><?= APP_NAME ?></span>
                 </a>
-                
-                <!-- Links de navegación desktop -->
+
+                <!-- Links desktop -->
                 <div class="hidden md:ml-8 md:flex md:space-x-8 items-center">
-                    <a href="<?= url('/dashboard') ?>" 
+                    <a href="<?= url('/dashboard') ?>"
                        class="<?= isRoute('/dashboard') ? 'border-b-2 border-primary text-gray-900 dark:text-white' : 'border-b-2 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300' ?> inline-flex items-center px-1 pt-1 text-sm font-medium">
                         Dashboard
                     </a>
-                    <a href="<?= url('/routines/generator') ?>" 
+                    <a href="<?= url('/routines/generator') ?>"
                        class="<?= isRoute('/routines/generator') ? 'border-b-2 border-primary text-gray-900 dark:text-white' : 'border-b-2 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300' ?> inline-flex items-center px-1 pt-1 text-sm font-medium">
                         Rutinas
                     </a>
-                    <a href="<?= url('/education/postural') ?>" 
+                    <a href="<?= url('/education/postural') ?>"
                        class="<?= (isRoute('/education/postural') || isRoute('/education/visual')) ? 'border-b-2 border-primary text-gray-900 dark:text-white' : 'border-b-2 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300' ?> inline-flex items-center px-1 pt-1 text-sm font-medium">
                         Educación
                     </a>
-                    <a href="<?= url('/routines/history') ?>" 
+                    <a href="<?= url('/routines/history') ?>"
                        class="<?= isRoute('/routines/history') ? 'border-b-2 border-primary text-gray-900 dark:text-white' : 'border-b-2 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300' ?> inline-flex items-center px-1 pt-1 text-sm font-medium">
                         Historial
                     </a>
                 </div>
             </div>
-            
+
             <!-- Acciones del usuario -->
             <div class="flex items-center gap-4">
-                <!-- Dark mode toggle -->
-                <button onclick="document.documentElement.classList.toggle('dark')" 
-                        class="p-2 rounded-lg text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 focus:outline-none">
-                    <span class="material-icons-round">dark_mode</span>
+                <!-- Toggle dark/light mode con persistencia -->
+                <button id="theme-toggle"
+                        class="p-2 rounded-lg text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 focus:outline-none"
+                        title="Cambiar tema">
+                    <span class="material-icons-round" id="theme-icon">dark_mode</span>
                 </button>
-                
-                <!-- Notificaciones -->
-                <button class="p-2 rounded-lg text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 focus:outline-none relative">
-                    <span class="material-icons-round">notifications</span>
-                    <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-                </button>
-                
+
                 <!-- Avatar y menú usuario -->
-                <div class="relative" x-data="{ open: false }">
+                <div class="relative">
                     <button class="flex items-center gap-2 focus:outline-none" id="user-menu-btn">
                         <div class="h-9 w-9 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm ring-2 ring-primary/20">
                             <?php if ($user): ?>
@@ -60,8 +55,8 @@
                             <?= $user ? e($user['first_name']) : 'Usuario' ?>
                         </span>
                     </button>
-                    
-                    <!-- Dropdown menu -->
+
+                    <!-- Dropdown -->
                     <div id="user-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-surface-light dark:bg-surface-dark rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-50">
                         <div class="px-4 py-2 border-b border-gray-100 dark:border-gray-700">
                             <p class="text-sm font-medium text-gray-900 dark:text-white">
@@ -82,7 +77,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Botón menú móvil -->
             <div class="flex items-center md:hidden">
                 <button id="mobile-menu-btn" class="p-2 rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -91,7 +86,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Menú móvil -->
     <div id="mobile-menu" class="hidden md:hidden border-t border-gray-200 dark:border-gray-700">
         <div class="px-4 py-3 space-y-1">
@@ -106,22 +101,37 @@
 </nav>
 
 <script>
-// Toggle dropdown del usuario
-document.getElementById('user-menu-btn')?.addEventListener('click', function() {
-    document.getElementById('user-dropdown').classList.toggle('hidden');
-});
+(function() {
+    // Sincronizar ícono con el estado actual al cargar
+    var isDark = document.documentElement.classList.contains('dark');
+    var icon = document.getElementById('theme-icon');
+    if (icon) icon.textContent = isDark ? 'light_mode' : 'dark_mode';
 
-// Toggle menú móvil
-document.getElementById('mobile-menu-btn')?.addEventListener('click', function() {
-    document.getElementById('mobile-menu').classList.toggle('hidden');
-});
+    // Toggle con persistencia en localStorage
+    document.getElementById('theme-toggle')?.addEventListener('click', function() {
+        isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('devhealth_theme', isDark ? 'dark' : 'light');
+        var icon = document.getElementById('theme-icon');
+        if (icon) icon.textContent = isDark ? 'light_mode' : 'dark_mode';
+    });
 
-// Cerrar dropdown al hacer click fuera
-document.addEventListener('click', function(e) {
-    const dropdown = document.getElementById('user-dropdown');
-    const btn = document.getElementById('user-menu-btn');
-    if (dropdown && !dropdown.contains(e.target) && !btn.contains(e.target)) {
-        dropdown.classList.add('hidden');
-    }
-});
+    // Dropdown usuario
+    document.getElementById('user-menu-btn')?.addEventListener('click', function() {
+        document.getElementById('user-dropdown').classList.toggle('hidden');
+    });
+
+    // Menú móvil
+    document.getElementById('mobile-menu-btn')?.addEventListener('click', function() {
+        document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+
+    // Cerrar dropdown al hacer click fuera
+    document.addEventListener('click', function(e) {
+        var dropdown = document.getElementById('user-dropdown');
+        var btn = document.getElementById('user-menu-btn');
+        if (dropdown && btn && !dropdown.contains(e.target) && !btn.contains(e.target)) {
+            dropdown.classList.add('hidden');
+        }
+    });
+})();
 </script>
