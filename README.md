@@ -133,7 +133,7 @@ mysql -u root -p devhealth < database/002_triggers_procedures.sql
 ### 3. Configurar la conexión
 Editar `config/database.php`:
 ```php
-define('DB_HOST', 'localhost');  
+define('DB_HOST', 'localhost');  // usar '127.0.0.1' en Arch Linux
 define('DB_NAME', 'devhealth');
 define('DB_USER', 'root');
 define('DB_PASS', '');           // vacío en XAMPP por defecto
@@ -270,8 +270,12 @@ http://localhost
 
 ## 👥 Autores
 
-**Brayan De Jesús Castillo**
+**Brayan De Jesús Castillo** 
 **Eduardo García Mendoza**
+
+Materia: Aplicaciones Web 
+Profesora: María del Carmen Santiago Díaz  
+Facultad de Ciencias de la Computación, BUAP · Primavera 2026
 
 ---
 
