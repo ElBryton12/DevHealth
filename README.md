@@ -27,7 +27,8 @@
 Devhealth/
 ├── config/
 │   ├── app.php                      # Constantes globales y tema
-│   ├── database.php                 # Conexión PDO a MariaDB
+│   ├── database.php                 # Conexión PDO a MariaDB (ignorado por git)
+│   ├── database.example.php         # Plantilla de configuración (sin credenciales)
 │   └── helpers.php                  # Auth, CSRF, flash, url(), redirect()
 ├── controllers/
 │   ├── AuthController.php           # Login, Registro, Logout
@@ -71,6 +72,7 @@ Devhealth/
 ├── database/
 │   ├── 001_initial_schema.sql       # Esquema inicial (5 tablas)
 │   └── 002_triggers_procedures.sql  # Triggers y procedimientos almacenados
+├── .gitignore                           # Excluye database.php y archivos sensibles
 └── README.md
 ```
 
@@ -131,7 +133,13 @@ mysql -u root -p devhealth < database/002_triggers_procedures.sql
 ```
 
 ### 3. Configurar la conexión
-Editar `config/database.php`:
+`config/database.php` está en `.gitignore` — nunca se sube al repositorio.  
+Crea tu archivo local a partir de la plantilla:
+```bash
+cp config/database.example.php config/database.php
+```
+
+Edita `config/database.php` con tus credenciales:
 ```php
 define('DB_HOST', 'localhost');  // usar '127.0.0.1' en Arch Linux
 define('DB_NAME', 'devhealth');
@@ -270,11 +278,11 @@ http://localhost
 
 ## 👥 Autores
 
-**Brayan De Jesús Castillo** 
+**Brayan De Jesús Castillo**  
 **Eduardo García Mendoza**
 
-Materia: Aplicaciones Web 
-Profesora: María del Carmen Santiago Díaz  
+Materia: Aplicaciones Web · NRC 47364  
+Profesor: María del Carmen Santiago Díaz  
 Facultad de Ciencias de la Computación, BUAP · Primavera 2026
 
 ---
