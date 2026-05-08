@@ -66,7 +66,6 @@
             },
         };
     </script>
-
     <?php if (!empty($extraHead)): ?>
         <?= $extraHead ?>
     <?php endif; ?>

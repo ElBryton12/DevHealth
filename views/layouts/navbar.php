@@ -77,7 +77,11 @@
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> adbeedb (Primer avance de proyecto MVC)
             <!-- Botón menú móvil -->
             <div class="flex items-center md:hidden">
                 <button id="mobile-menu-btn" class="p-2 rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -86,7 +90,6 @@
             </div>
         </div>
     </div>
-
     <!-- Menú móvil -->
     <div id="mobile-menu" class="hidden md:hidden border-t border-gray-200 dark:border-gray-700">
         <div class="px-4 py-3 space-y-1">
