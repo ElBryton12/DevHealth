@@ -76,7 +76,7 @@ class DashboardController {
         // 5. Gráfico: rutinas por día (últimos 7 días)
         $chartLabels = [];
         $chartData = [];
-        $dayNames = ['Dom', 'Lun', 'Mar', 'Mi\u00e9', 'Jue', 'Vie', 'S\u00e1b'];
+        $dayNames = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
         
         for ($i = 6; $i >= 0; $i--) {
             $date = new DateTime("-{$i} days");
