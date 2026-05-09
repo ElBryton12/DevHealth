@@ -12,6 +12,7 @@ require_once __DIR__ . '/../../config/app.php';
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title><?= APP_NAME ?> - Salud Ocupacional para Desarrolladores</title>
+    <link rel="icon" type="image/x-icon" href="<?= url('/favicon.ico') ?>">
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />

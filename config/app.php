@@ -9,7 +9,7 @@ define('APP_TAGLINE', 'Salud Ocupacional para Desarrolladores');
 define('APP_VERSION', '1.0.0');
 
 // URL base (ajustar según tu entorno)
-define('BASE_URL', '');
+define('BASE_URL', '/Devhealth/public');
 
 // Zona horaria
 date_default_timezone_set('America/Mexico_City');
